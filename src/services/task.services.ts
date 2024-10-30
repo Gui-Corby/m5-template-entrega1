@@ -9,7 +9,7 @@ import { ZodError } from "zod";
 export class TaskServices {
     async createTask(body: TCreateTaskSchema): Promise<TTaskReturn> {
     
-        if (body.categoryId) {
+        if (body.categoryId !== undefined && body.categoryId !== null) {
             const category = await prisma.category.findUnique({ where: { id: body.categoryId } })
 
             if (!category) {
@@ -47,13 +47,13 @@ export class TaskServices {
             const newCategory = await prisma.category.create({
                 data: validateCategory,
             });
-            // console.log("Category created in database:", newCategory);
 
             return categorySchema.parse(newCategory)
 
         } catch (error) {
             if (error instanceof ZodError) {
-                throw new AppError(`Message:${error.errors.map(e => e.message).join(", ")}`, 400)
+                console.log("Validation failed:", error.errors);
+                throw new AppError("Validation error", 400)
             }
 
             throw error;

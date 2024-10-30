@@ -13,18 +13,9 @@ export class HandleErrors {
 
         if (error instanceof ZodError) {
             return res.status(400).json({
-                errors: error.errors.map(e => ({
-                    code: e.code,
-                    path: e.path,
-                    message: e.message
-                }))
-            });
-        }
-
-        return res.status(500).json({ message: "Internal server error" });
-
-
-
+                errors: error.issues
+            })
+        };
 
 
         return res.status(500).json({ message: "Internal server error" });

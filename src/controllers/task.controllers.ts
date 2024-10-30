@@ -7,12 +7,11 @@ import { TCategoryReturn, TTaskReturnWithCategory } from "../schemas/category.sc
 
 @injectable()
 export class TaskControllers {
-    constructor(@inject("TaskServices") private taskService: TaskServices) {}
+    constructor(@inject("TaskServices") private taskService: TaskServices) { }
 
     async createTask(req: Request, res: Response): Promise<Response<TTaskReturn>> {
-        console.log("Request body for creating task:", req.body);
+
         const response = await this.taskService.createTask(req.body);
-        console.log("Task creation response: ", response);
         return res.status(201).json(response);
     }
 
@@ -23,15 +22,13 @@ export class TaskControllers {
     }
 
     async createCategory(req: Request, res: Response): Promise<Response<TCategoryReturn>> {
-        // console.log("Controller: received body", req.body)
 
         const response = await this.taskService.createCategory(req.body);
 
-        console.log(typeof response)
-        
+
         return res.status(201).json(response);
-       
-        
+
+
     }
 
     async deleteCategory(req: Request, res: Response) {
@@ -50,14 +47,14 @@ export class TaskControllers {
     async getAllTasks(req: Request, res: Response): Promise<Response<TTaskReturnWithCategory[]>> {
         console.log("Fetching all tasks");
         const category = req.query.category as string;
-        
+
         if (category) {
             const response = await this.taskService.getTasksByCategory(category);
             return res.status(200).json(response)
         }
 
         const response = await this.taskService.getAllTasks();
-        console.log("All tasks response:", response);
+        
         return res.status(200).json(response);
     }
 

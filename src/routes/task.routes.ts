@@ -11,22 +11,22 @@ const taskControllers = container.resolve(TaskControllers);
 
 export const taskRouter = Router();
 
-taskRouter.post("/tasks", ValidateBody.execute(createTaskBodySchema), (req, res) =>
+taskRouter.post("/", ValidateBody.execute(createTaskBodySchema), (req, res) =>
     taskControllers.createTask(req, res))
 
-taskRouter.get("/tasks", (req, res) => taskControllers.getAllTasks(req, res))
+taskRouter.get("/", (req, res) => taskControllers.getAllTasks(req, res))
 
-taskRouter.get("/tasks/:id", (req, res) => taskControllers.getTaskById(req, res));
+taskRouter.get("/:id", (req, res) => taskControllers.getTaskById(req, res));
 
-taskRouter.patch("/tasks/:id", ValidateBody.execute(updateTaskBodySchema), (req, res) => taskControllers.updateTask(req, res));
+taskRouter.patch("/:id", ValidateBody.execute(updateTaskBodySchema), (req, res) => taskControllers.updateTask(req, res));
 
-taskRouter.delete("/tasks/:id", (req, res) => taskControllers.deleteTask(req, res));
+taskRouter.delete("/:id", (req, res) => taskControllers.deleteTask(req, res));
 
 console.log("Categories route registered");
 
-taskRouter.post("/categories", ValidateBody.execute(createCategoryBodySchema), 
-(req, res) => {
-    taskControllers.createCategory(req, res);
-})
+// taskRouter.post("/categories", ValidateBody.execute(createCategoryBodySchema), 
+// (req, res) => {
+//     taskControllers.createCategory(req, res);
+// })
 
-taskRouter.delete("/categories/:id", (req, res) => taskControllers.deleteCategory(req, res));
+// taskRouter.delete("/categories/:id", (req, res) => taskControllers.deleteCategory(req, res));

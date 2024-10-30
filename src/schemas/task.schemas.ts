@@ -5,12 +5,10 @@ export const taskSchema = z.object({
     title: z.string().min(1),
     content: z.string().min(1),
     finished: z.boolean(),
-    categoryId: z.number()
+    categoryId: z.number().nullable().optional()
 })
 
-export const createTaskBodySchema = taskSchema.omit({ id: true, finished: true,}).extend({
-    categoryId: z.number().optional(),
-});
+export const createTaskBodySchema = taskSchema.omit({ id: true, finished: true,})
 
 export const updateTaskBodySchema = taskSchema.pick({
     title: true,
@@ -22,6 +20,7 @@ export const updateTaskBodySchema = taskSchema.pick({
 export type TCreateTaskSchema = z.infer<typeof createTaskBodySchema>
 
 export type TTaskReturn = z.infer<typeof taskSchema>
+// export type TTaskReturn = z.infer<typeof createTaskBodySchema>
 
 export type TUpdateTaskSchema = z.infer<typeof updateTaskBodySchema>
 
