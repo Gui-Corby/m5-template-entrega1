@@ -9,5 +9,6 @@ beforeEach(async () => {
   await prisma.$transaction([
     prisma.category.deleteMany(),
     prisma.task.deleteMany(),
+    prisma.user.deleteMany(),
   ]);
 });
