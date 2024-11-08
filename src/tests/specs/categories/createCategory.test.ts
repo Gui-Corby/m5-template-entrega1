@@ -31,7 +31,7 @@ describe("create category", async () => {
     expect(data.userId).toBeTypeOf("number")
   });
 
-  it("should throw an error when trying to create a task with a missing body parameter", async () => {
+  it("should throw an error when trying to create a category with a missing body parameter", async () => {
     const { token } = await generateAuthentication();
 
     await request

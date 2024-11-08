@@ -2,13 +2,14 @@ import { z } from "zod";
 
 export const taskSchema = z.object({
     id: z.number(),
+    userId: z.number(),
     title: z.string().min(1),
     content: z.string().min(1),
     finished: z.boolean(),
     categoryId: z.number().nullable().optional()
 })
 
-export const createTaskBodySchema = taskSchema.omit({ id: true, finished: true,})
+export const createTaskBodySchema = taskSchema.omit({ id: true, finished: true, userId: true})
 
 export const updateTaskBodySchema = taskSchema.pick({
     title: true,

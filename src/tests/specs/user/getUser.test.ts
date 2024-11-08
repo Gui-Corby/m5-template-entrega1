@@ -8,7 +8,7 @@ describe("get user", () => {
         const { token } = await generateAuthentication();
 
         const data = await request
-            .get("/users.profile")
+            .get("/users/profile")
             .set("Authorization", `Bearer ${token}`)
             .expect(200)
             .then((response) => response.body);
