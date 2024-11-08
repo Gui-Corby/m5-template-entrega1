@@ -4,7 +4,6 @@ import { invalidDataUserMock, userMock } from "../../mocks/user.mocks";
 import { userDefaultExpects } from "../../utils/userDefaultExpects";
 import { prisma } from "../../../database/prisma";
 
-
 describe("register user", () => {
     it("should be able to register a user successfully", async () => {
         const data = await request
