@@ -22,4 +22,8 @@ app.use("/tasks", taskRouter);
 app.use("/categories", categoryRouter);
 app.use("/users", userRouter)
 
+app.get("/", (req, res) => {
+    res.send("Welcome to my API! The server is up and running.");
+})
+
 app.use(HandleErrors.execute);
